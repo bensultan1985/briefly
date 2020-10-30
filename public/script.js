@@ -4,8 +4,9 @@ let countDown = 120000;
 
 const getNews = async()=> {
     const rawResponse = await fetch('/nytimes');
-    data = await rawResponse.json(); 
-    console.log(data.response.docs['0'])
+    console.log(rawResponse)
+    data = await rawResponse.json();
+    console.log(data)
     document.getElementById('article-data').innerHTML = '';
     data.response.docs.forEach(element => {
         let item = document.createElement('div');
@@ -26,12 +27,12 @@ const getNews = async()=> {
         let summary = document.createElement('div');
         summary.style.display = 'none';
         let summaryp = document.createElement('p');
-        let photo = document.createElement('img')
-        photo.className = 'photo'
-        photo.src = 'http://www.nytimes.com/' + element.multimedia[0].url;
-        summaryp.innerHTML = element.abstract + `<div><br>Article Link: <a href=${element.web_url} style="color: white">${element.web_url}</a></div>`;
-        if (summaryp.innerHTML == '') summaryp.innerHTML = 'no additional information';
-        summary.appendChild(photo)
+        // let photo = document.createElement('img')
+        // photo.className = 'photo'
+        // photo.src = 'http://www.nytimes.com/' + element.multimedia[0].url;
+        // summaryp.innerHTML = element.abstract + `<div><br>Article Link: <a href=${element.web_url} style="color: white">${element.web_url}</a></div>`;
+        // if (summaryp.innerHTML == '') summaryp.innerHTML = 'no additional information';
+        // summary.appendChild(photo)
         summary.appendChild(summaryp);
         summaryp.className = 'summaryp';
         summary.className = 'summary';
@@ -42,7 +43,6 @@ const getNews = async()=> {
             headline.className = 'headline';
         }, 118000)
     });
-    console.log(headlineTracker)
     firstCall = false;
 };
 
@@ -55,7 +55,6 @@ const subtractOne = () => {
 window.setInterval(function(){
     if (countDown > 0) {
         subtractOne();
-    console.log(countDown);
     } else {
         getNews();
     }
