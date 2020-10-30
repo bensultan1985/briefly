@@ -19,21 +19,11 @@ app.use(express.urlencoded({extended: false}));
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 
-app.post('/server', async (req, res) => {
-userSubmissions.push(req.body)
-console.log(userSubmissions, 'This function simulates a post to the API by using an array to store data')
-res.send('200');
-console.log('request made successfully');
-})
-
-app.get('/events', async (req, res) => {
-    res.send(scheduleArray);
-    console.log('events sent')
-})
 
 let count = 0
 app.get('/nytimes', async (req, res) => {
     count++
+    console.log('hi')
     let response = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=VAsImL2HhJlN3C5QJmDi1RmP1M4nh2Ko`).then(res => res.json());
     console.log(response)
     res.send(response);
@@ -41,3 +31,5 @@ app.get('/nytimes', async (req, res) => {
     console.log(count)
     //
     })
+
+    console.log('hi')
