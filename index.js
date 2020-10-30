@@ -33,7 +33,7 @@ app.get('/events', async (req, res) => {
 
 
 app.get('/nytimes', async (req, res) => {
-    let response = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=9hF6uiZFm8pPLDGLCGZoP3MhhVsHiMsL`).then(res => res.json());
+    let response = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=6FUObTADh8rJ4wchhhWZbfAgIuhwZEr1`).then(res => res.json());
     console.log(response)
     res.send(response);
     console.log('request made successfully');
