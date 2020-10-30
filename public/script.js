@@ -46,7 +46,7 @@ const getNews = async()=> {
     firstCall = false;
 };
 
-getNews();
+window.load(getNews());
 
 // const subtractOne = () => {
 //     countDown = countDown -1000;

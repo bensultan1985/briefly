@@ -2,7 +2,7 @@
 // script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";
 // document.head.appendChild(script)
 
-$(() => {
+$document.ready(() => {
   $(document).on("click", ".headline", (e) => {
     $(e.target.nextSibling).slideToggle(300);
     countDown = 120000;
