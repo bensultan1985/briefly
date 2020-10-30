@@ -48,15 +48,15 @@ const getNews = async()=> {
 
 getNews();
 
-const subtractOne = () => {
-    countDown = countDown -1000;
-}
+// const subtractOne = () => {
+//     countDown = countDown -1000;
+// }
 
-window.setInterval(function(){
-    if (countDown > 0) {
-        subtractOne();
-    } else {
-        console.log('getnews')
-        getNews();
-    }
-  }, 1000);
+// window.setInterval(function(){
+//     if (countDown > 0) {
+//         subtractOne();
+//     } else {
+//         console.log('getnews')
+//         getNews();
+//     }
+//   }, 1000);
