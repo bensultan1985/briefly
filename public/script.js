@@ -1,5 +1,6 @@
 let headlineTracker = {};
 firstCall = true;
+let start = true;
 let countDown = 120000;
 
 const getNews = async()=> {
@@ -46,7 +47,10 @@ const getNews = async()=> {
     firstCall = false;
 };
 
-window.load(getNews());
+if (start == true) {
+    getNews();
+    start = false;
+}
 
 // const subtractOne = () => {
 //     countDown = countDown -1000;
