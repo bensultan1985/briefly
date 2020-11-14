@@ -23,13 +23,8 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 let count = 0
 app.get('/nytimes', async (req, res) => {
     count++
-    console.log('hi')
     let response = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=VAsImL2HhJlN3C5QJmDi1RmP1M4nh2Ko`).then(res => res.json());
-    console.log(response)
+    console.log(response);
     res.send(response);
-    console.log('request made successfully');
-    console.log(count)
-    //
+    console.log(count);
     })
-
-    console.log('hi')

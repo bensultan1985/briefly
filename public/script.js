@@ -58,5 +58,6 @@ window.setInterval(function(){
     } else {
         console.log('getnews')
         getNews();
+        count = 120000;
     }
   }, 1000);
