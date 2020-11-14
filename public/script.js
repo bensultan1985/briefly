@@ -54,10 +54,11 @@ const subtractOne = () => {
 
 window.setInterval(function(){
     if (countDown > 0) {
-        subtractOne();
+        console.log(count, 'subtract')
+        return subtractOne();
     } else {
-        console.log('getnews')
         count = 120000;
-        getNews();
+        console.log(count, 'CALL')
+        return getNews();
     }
   }, 1000);
