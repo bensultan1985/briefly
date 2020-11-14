@@ -57,7 +57,7 @@ window.setInterval(function(){
         subtractOne();
     } else {
         console.log('getnews')
-        getNews();
         count = 120000;
+        getNews();
     }
   }, 1000);
