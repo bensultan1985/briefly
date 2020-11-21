@@ -77,6 +77,7 @@ fetch('/nytimes', {
               headlineTracker[element.headline.main] = true;
               headline.className = 'headline new';
               sendAlert = true;
+              console.log('should send alert')
           } else {
           headlineTracker[element.headline.main] = true;
           headline.className = 'headline';
@@ -101,6 +102,7 @@ fetch('/nytimes', {
           headline.className = 'headline';
       }, 118000)
   });
+  console.log(sendAlert, 'sendAlert')
   if (sendAlert == true) alert('New article summaries have been delivered.');
   firstCall = false;
   return;
@@ -124,6 +126,6 @@ window.setInterval(function(){
     } else {
         countDown = 120000;
         console.log(countDown, 'CALL')
-        return getNews('noNew');
+        return getNews();
     }
   }, 1000);
