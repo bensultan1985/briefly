@@ -6,6 +6,7 @@ $(() => {
   $(document).on("click", ".headline", (e) => {
     $(e.target.nextSibling).slideToggle(300);
     countDown = 120000;
+    if (e.target.className == 'headline new') e.target.className = 'headline';
     if (e.target.firstChild.className == 'fa fa-arrow-circle-right') {
       e.target.firstChild.className = 'fa fa-arrow-circle-down';
     } else {
