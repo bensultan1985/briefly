@@ -67,8 +67,9 @@ fetch('/nytimes', {
   document.getElementById('article-data').innerHTML = '';
   data.response.docs.forEach(element => {
       let item = document.createElement('div');
+      let clock = new Date(element.pub_date)
       let headline = document.createElement('div');
-      headline.innerHTML = '<i class="fa fa-arrow-circle-right"></i> ' + element.headline.main;
+      headline.innerHTML = '<i class="fa fa-arrow-circle-right"></i> ' + element.headline.main + ' ' + clock.toString();
       if (headlineTracker[element.headline.main]) {
           headline.className = 'headline';
       }
@@ -121,7 +122,7 @@ const subtractOne = () => {
 
 window.setInterval(function(){
     if (countDown > 0) {
-        // console.log(countDown, 'subtract')
+        console.log(countDown, 'subtract')
         return subtractOne();
     } else {
         countDown = 120000;
