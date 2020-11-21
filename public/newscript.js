@@ -1,4 +1,4 @@
-
+//use if you can get newswire api to return query string results
 
 let headlineTracker = {};
 firstCall = true;
@@ -7,52 +7,21 @@ let tag1 = '';
 let searchValue = document.getElementById('search-value');
 let tagList = document.getElementById('tag-list');
 let addTag = document.getElementById('add-tag');
-let allTags = [];
-
-const delTag = (e) => {
-    for (let i = 0; i < allTags.length; i++) {
-        if (allTags[i] == e.target.value) {
-            allTags.splice(i, 1);
-            console.log(allTags);
-        }
-    }
-    refreshTags()
-    getNews('noNew')
-}
-
-const refreshTags = () => {
-    tagList.innerHTML = '';
-    tag1 = '';
-    if (searchValue.value != '') {
-        tag1 = searchValue.value;
-        allTags.push(tag1)
-    }
-    allTags.forEach(element => {
-        let item = document.createElement('span')
-        let text = document.createTextNode(element + ' x')
-        item.appendChild(text)
-        item.className = 'search-tag'
-        tagList.appendChild(item)
-        item.value = element;
-        console.log(item.value)
-        item.addEventListener('click', delTag)
-    })
-}
 
 addTag.addEventListener('click', () => {
-    refreshTags();
+    tagList.innerHTML = '';
+    tag1 = searchValue.value;
+    let text = document.createTextNode(searchValue.value)
+    tagList.appendChild(text)
     countDown = 120000;
     console.log(countDown, 'CALL')
-    searchValue.value = '';
-    searchValue.text = '';
-    console.log(allTags)
     return getNews('noNew');
 })
 
 
 const getNews = async(isNew)=> {
     let sendAlert = false;
-    const data = {tag: allTags};
+    const data = {tag: tag1};
 
 fetch('/nytimes', {
   method: 'POST', // or 'PUT'
@@ -65,20 +34,20 @@ fetch('/nytimes', {
 .then(data => {
   console.log('Success:', data);
   document.getElementById('article-data').innerHTML = '';
-  data.response.docs.forEach(element => {
+  data.results.forEach(element => {
       let item = document.createElement('div');
       let headline = document.createElement('div');
-      headline.innerHTML = '<i class="fa fa-arrow-circle-right"></i> ' + element.headline.main;
-      if (headlineTracker[element.headline.main]) {
+      headline.innerHTML = '<i class="fa fa-arrow-circle-right"></i> ' + element.title;
+      if (headlineTracker[element.title]) {
           headline.className = 'headline';
       }
-      if (!headlineTracker[element.headline.main]) {
+      if (!headlineTracker[element.title]) {
           if (!firstCall && isNew != 'noNew') {
-              headlineTracker[element.headline.main] = true;
+              headlineTracker[element.title] = true;
               headline.className = 'headline new';
               sendAlert = true;
           } else {
-          headlineTracker[element.headline.main] = true;
+          headlineTracker[element.title] = true;
           headline.className = 'headline';
           }
       }
@@ -87,8 +56,8 @@ fetch('/nytimes', {
       let summaryp = document.createElement('p');
       let photo = document.createElement('img')
       photo.className = 'photo'
-      if (element.multimedia[0] != null) photo.src = 'http://www.nytimes.com/' + element.multimedia[0].url;
-      summaryp.innerHTML = element.abstract + `<div><br>Article Link: <a href=${element.web_url} style="color: white" target="_blank">${element.web_url}</a></div>`;
+      if (element.multimedia != null) photo.src = element.multimedia[2].url;
+      summaryp.innerHTML = element.abstract + `<div><br>Article Link: <a href=${element.url} style="color: white">${element.url}</a></div>`;
       if (summaryp.innerHTML == '') summaryp.innerHTML = 'no additional information';
       summary.appendChild(photo)
       summary.appendChild(summaryp);
@@ -119,7 +88,7 @@ const subtractOne = () => {
 
 window.setInterval(function(){
     if (countDown > 0) {
-        // console.log(countDown, 'subtract')
+        console.log(countDown, 'subtract')
         return subtractOne();
     } else {
         countDown = 120000;

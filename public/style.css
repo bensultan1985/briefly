@@ -66,3 +66,13 @@ img {
 
 .summaryp {
 }
+
+.search-tag {
+    display: inline-block;
+    border: solid;
+    border-width: 1px;
+    border-radius: 25px;
+    color: red;
+    padding: 4px 10px;
+    margin: 5px;
+}
