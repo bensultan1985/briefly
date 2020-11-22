@@ -69,7 +69,7 @@ fetch('/nytimes', {
       let item = document.createElement('div');
       let clock = new Date(element.pub_date)
       let headline = document.createElement('div');
-      headline.innerHTML = '<i class="fa fa-arrow-circle-right"></i> ' + element.headline.main + ' ' + clock.toString();
+      headline.innerHTML = '<i class="fa fa-arrow-circle-right"></i> ' + element.headline.main;
       if (headlineTracker[element.headline.main]) {
           headline.className = 'headline';
       }
