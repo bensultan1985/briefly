@@ -8,17 +8,21 @@
     <link rel="stylesheet" href="style.css">
     <title>Briefly</title>
 </head>
-<body>
+<body onload="onLoad()">
     <h1 class="h1 actual">Briefly</h1>
-    <h5 class="h5">Live Top News Headlines</h5>
-    <div>
+    <!-- Live Top News Headlines -->
+    <h5 class="h5"><span id= "live-dot" style="color:red"><strong style="font-size: 24px;">•</strong></span>Live News Updates</h5>
+    <div class="search-container">
         <input type="text" id="search-value"><button id="add-tag">add tag</button>
         <div id="tag-list"></div>
     </div>
-    <div id="article-data"></div>
+    <div id="article-data"><span style="background: #E7E7E7; padding: 4px;">loading...</span></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="jquery.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="utilities.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+
+
 </body>
 </html>

@@ -1,7 +1,7 @@
 
 
 let headlineTracker = {};
-firstCall = true;
+let firstCall = true;
 let countDown = 120000;
 let tag1 = '';
 let searchValue = document.getElementById('search-value');
@@ -9,24 +9,29 @@ let tagList = document.getElementById('tag-list');
 let addTag = document.getElementById('add-tag');
 let allTags = [];
 
+const onLoad = () => {
+    getNews('noNew');
+};
+
 const delTag = (e) => {
     for (let i = 0; i < allTags.length; i++) {
         if (allTags[i] == e.target.value) {
             allTags.splice(i, 1);
-            console.log(allTags);
-        }
-    }
-    refreshTags()
-    getNews('noNew')
-}
+        };
+    };
+    refreshTags(false);
+    getNews('noNew');
+};
 
-const refreshTags = () => {
+const refreshTags = (addSearchValue) => {
     tagList.innerHTML = '';
     tag1 = '';
-    if (searchValue.value != '') {
-        tag1 = searchValue.value;
-        allTags.push(tag1)
-    }
+    if (addSearchValue){
+        if (searchValue.value != '') {
+            tag1 = searchValue.value;
+            allTags.push(tag1)
+        };
+    };
     allTags.forEach(element => {
         let item = document.createElement('span')
         let text = document.createTextNode(element + ' x')
@@ -34,18 +39,15 @@ const refreshTags = () => {
         item.className = 'search-tag'
         tagList.appendChild(item)
         item.value = element;
-        console.log(item.value)
         item.addEventListener('click', delTag)
     })
 }
 
 addTag.addEventListener('click', () => {
-    refreshTags();
+    refreshTags(true);
     countDown = 120000;
-    console.log(countDown, 'CALL')
     searchValue.value = '';
     searchValue.text = '';
-    console.log(allTags)
     return getNews('noNew');
 })
 
@@ -78,7 +80,6 @@ fetch('/nytimes', {
               headlineTracker[element.headline.main] = true;
               headline.className = 'headline new';
               sendAlert = true;
-              console.log('should send alert')
           } else {
           headlineTracker[element.headline.main] = true;
           headline.className = 'headline';
@@ -103,7 +104,6 @@ fetch('/nytimes', {
           headline.className = 'headline';
       }, 118000)
   });
-  console.log(sendAlert, 'sendAlert')
   if (sendAlert == true) alert('New article summaries have been delivered.');
   firstCall = false;
   return;
@@ -114,19 +114,28 @@ fetch('/nytimes', {
 });
 }
 
-getNews('noNew');
-
 const subtractOne = () => {
     countDown = countDown -1000;
-}
+};
 
 window.setInterval(function(){
     if (countDown > 0) {
-        console.log(countDown, 'subtract')
         return subtractOne();
     } else {
         countDown = 120000;
-        console.log(countDown, 'CALL')
         return getNews();
     }
-  }, 1000);
+}, 1000);
+
+(function loop() {
+    var rand = Math.round(Math.random() * (1000 - 500)) + 50;
+    setTimeout(function() {
+        let liveDot = document.getElementById("live-dot");
+        if (liveDot.style.color == "red") {
+            liveDot.style.color = "#FFA5A5";
+        } else {
+            liveDot.style.color = "red";
+        }
+            loop();  
+    }, rand);
+}());
